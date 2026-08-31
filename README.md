@@ -174,7 +174,7 @@ We tested k = 2 to 8 using **Silhouette Score** (higher = better clusters):
 | Metric | **k=2** | **k=3** |
 |--------|---------|---------|
 | Silhouette Score | **0.2519** ✅ | 0.1519 |
-| Cluster Purity (vs Customer type) | **~25%** ✅ | 17% |
+| Cluster Purity (vs Customer type) | **~26%** | 17% |
 | Cluster 0 avg Total | **$611.50** | $116.72 |
 | Cluster 1 avg Total | $172.33 | $684.58 |
 | Cluster 2 avg Total | — | $278.64 |
@@ -244,7 +244,7 @@ Customer Mix: 322 Member + 335 Normal
 
 ### ✅ Cluster Purity
 - Measures how well clusters align with the known `Customer type` (Member/Normal)
-- **k=2: ~25%** — clusters capture some Member/Normal patterns but aren't purely defined by it
+- **k=2: ~26%** — i.e. **below the 50% majority-class baseline**, which confirms the clusters are driven by *spending behavior, NOT membership status*. The two segments differ mainly in basket size / total spend, so customer type is not a useful differentiator (consistent with the conclusion in Section 7).
 
 ### ✅ Train/Test Validation
 - Split data 70% train / 30% test
@@ -301,23 +301,22 @@ Customer Mix: 322 Member + 335 Normal
 
 ### 📁 Project Files
 ```
-kuas/
+supermarket-customer-segmentation/
 ├── preprocessing.py   → data cleaning, encoding, scaling
-├── app.py             → Streamlit dashboard (FIXED & WORKING)
+├── app.py             → Streamlit dashboard
 ├── main.py            → full clustering pipeline
 ├── api.py             → Flask REST API
+├── compare_k.py       → K=2 vs K=3 comparison
 ├── data/raw/          → original CSV
 ├── results/           → CSV outputs + plots
-├── nextjs/            → Next.js/TS frontend (optional)
 ```
 
 ---
 
 ## 11. How to Run
 
-### ▶️ Run the Dashboard (already running)
+### ▶️ Run the Dashboard
 ```bash
-cd C:\Users\hp\Downloads\kuas
 streamlit run app.py
 # Open http://localhost:8501
 ```
